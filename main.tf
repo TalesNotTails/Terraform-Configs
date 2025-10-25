@@ -1,5 +1,5 @@
 resource "aws_instance" "ansible_dev_node" {
-  ami           = "ami-0572c4c57382716bb"
+  ami           = "ami-025320f9a154d727c"
   instance_type = "t2.micro"
   security_groups = [ "EC2-Default-SG" ]
   root_block_device {
