@@ -3,6 +3,6 @@ resource "aws_ebs_volume" "bois_mc_vol" {
   size = 20
   type = "gp3"
   tags = {
-    Name = "bois_minecraft_ebs_vol"
+    state = "new"
   }
 }
