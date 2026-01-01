@@ -46,3 +46,16 @@ variable egress_rules {
   }))
 }
 
+variable servers {
+  description = "A map of servers with properties to create"
+  type        = map(object({
+    sec_groups  = list(string)
+    subnet    = string
+    inst_ami  = string
+    inst_type = string
+    vol_size  = number
+    vol_type  = string    
+    vol_az    = string
+    tags      = map(string)
+  }))
+}

@@ -1,13 +1,14 @@
 variable servers {
   description = "A map of servers with properties to create"
   type        = map(object({
+    sec_groups  = list(string)
     subnet    = string
-    pub_ip    = bool
     inst_ami  = string
     inst_type = string
     vol_size  = number
     vol_type  = string    
     vol_az    = string
+    tags      = map(string)
   }))
 }
 
@@ -23,5 +24,10 @@ variable vol_ids {
 
 variable subnet_ids {
   description = "A map of ids for each subnet"
+  type        = any
+}
+
+variable sec_group_ids {
+  description = "A map of ids for each sec group"
   type        = any
 }

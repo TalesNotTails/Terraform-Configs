@@ -57,6 +57,7 @@ ingress_rules = {
     cidr_ipv4       = "0.0.0.0/0"
     from_port       = 22
     to_port         = 22
+    servers         = ["discord_mc_server"]
   } 
 }
 

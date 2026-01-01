@@ -1,13 +1,14 @@
 variable servers {
   description = "A map of servers with properties to create"
   type        = map(object({
+    sec_groups  = list(string)
     subnet    = string
-    pub_ip    = bool
     inst_ami  = string
     inst_type = string
     vol_size  = number
     vol_type  = string    
     vol_az    = string
+    tags      = map(string)
   }))
 }
 
@@ -40,7 +41,7 @@ variable sec_groups {
 variable ingress_rules {
   description = "A map of ingress_rules"
   type        = map(object({
-    sec_group  = string
+    sec_group       = string
     ip_protocol     = string
     cidr_ipv4       = string
     from_port       = number
@@ -51,10 +52,10 @@ variable ingress_rules {
 variable egress_rules {
   description = "A map of egress_rules"
   type        = map(object({
-    sec_group  = string
-    ip_protocol     = string
-    cidr_ipv4       = string
-    from_port       = number
-    to_port         = number
+    sec_group   = string
+    ip_protocol = string
+    cidr_ipv4   = string
+    from_port   = number
+    to_port     = number
   }))
 }
