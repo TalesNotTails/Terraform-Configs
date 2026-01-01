@@ -11,6 +11,7 @@ module "network" {
   sec_groups    = var.sec_groups
   ingress_rules = var.ingress_rules
   egress_rules  = var.egress_rules
+  servers       = var.servers
 }
 
 module "compute" {
@@ -19,4 +20,5 @@ module "compute" {
   vol_ids     = module.storage.ebs_vol_ids
   vol_azs     = module.storage.ebs_vol_azs
   subnet_ids  = module.network.subnet_ids
+  sec_group_ids = module.network.instance_sec_group_map
 }

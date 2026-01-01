@@ -5,10 +5,10 @@ resource "aws_vpc" "vpcs" {
 }
 
 resource "aws_subnet" "subnets" {
-  for_each    = var.subnets
+  for_each          = var.subnets
   availability_zone = each.value.az
-  vpc_id      = aws_vpc.vpcs[each.value.vpc].id
-  cidr_block  = each.value.cidr_block
+  vpc_id            = aws_vpc.vpcs[each.value.vpc].id
+  cidr_block        = each.value.cidr_block
 }
 
 resource "aws_security_group" "sec_groups" {
@@ -34,4 +34,8 @@ resource "aws_vpc_security_group_egress_rule" "egress_rules" {
   cidr_ipv4         = each.value.cidr_ipv4
   from_port         = each.value.from_port
   to_port           = each.value.to_port
+}
+
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.vpcs["main_vpc"].id
 }

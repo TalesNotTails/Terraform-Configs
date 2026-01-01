@@ -7,6 +7,10 @@ servers = {
     vol_size  = 10
     vol_type  = "gp3"
     vol_az    = "us-east-1a"
+    sec_groups  = ["allow_ssh"]
+    tags      = {
+      name = "babe_mc_server"
+    }
   },
   discord_mc_server = {
     subnet    = "mc_subnet"
@@ -16,6 +20,10 @@ servers = {
     vol_size  = 10
     vol_type  = "gp3"
     vol_az    = "us-east-1a"
+    sec_groups  = ["allow_ssh"]
+    tags      = {
+      name = "discord_mc_server"
+    }
   }
 }
 
@@ -49,6 +57,7 @@ ingress_rules = {
     cidr_ipv4       = "0.0.0.0/0"
     from_port       = 22
     to_port         = 22
+    servers         = ["discord_mc_server"]
   } 
 }
 
