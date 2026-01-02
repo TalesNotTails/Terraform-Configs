@@ -59,3 +59,20 @@ variable servers {
     tags      = map(string)
   }))
 }
+
+variable route_tables {
+  description = "A map of route tables"
+  type        = map(object({
+    vpc     = string
+    subnet  = string
+  }))
+}
+
+variable routes {
+  description = "A map of routes"
+  type        = map(object({
+    gateway = string
+    cidr_block  = string
+    route_table = string
+  }))
+}

@@ -1,6 +1,5 @@
 module "storage" {
   source = "./aws_modules/storage"
-
   servers = var.servers
 }
 
@@ -12,6 +11,8 @@ module "network" {
   ingress_rules = var.ingress_rules
   egress_rules  = var.egress_rules
   servers       = var.servers
+  route_tables  = var.route_tables
+  routes        = var.routes
 }
 
 module "compute" {

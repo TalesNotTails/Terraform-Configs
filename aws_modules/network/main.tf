@@ -36,6 +36,24 @@ resource "aws_vpc_security_group_egress_rule" "egress_rules" {
   to_port           = each.value.to_port
 }
 
-resource "aws_internet_gateway" "gw" {
+resource "aws_internet_gateway" "gateways" {
   vpc_id = aws_vpc.vpcs["main_vpc"].id
+}
+
+resource "aws_route_table" "route_tables" {
+  for_each  = var.route_tables
+  vpc_id = aws_vpc.vpcs[each.value.vpc].id
+}
+
+resource "aws_route" "routes" {
+  for_each  = var.routes
+  gateway_id  = aws_internet_gateway.gateways.id
+  route_table_id  = aws_route_table.route_tables[each.value.route_table].id
+  destination_cidr_block  = each.value.cidr_block
+}
+
+resource "aws_route_table_association" "table_associations" {
+  for_each       = var.route_tables
+  subnet_id      = aws_subnet.subnets[each.value.subnet].id
+  route_table_id = aws_route_table.route_tables[each.key].id
 }

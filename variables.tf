@@ -12,6 +12,10 @@ variable servers {
   }))
 }
 
+###
+# Network
+###
+
 variable vpcs {
   description = "A map of vpcs with properties to create"
   type        = map(object({
@@ -57,5 +61,22 @@ variable egress_rules {
     cidr_ipv4   = string
     from_port   = number
     to_port     = number
+  }))
+}
+
+variable route_tables {
+  description = "A map of route tables"
+  type        = map(object({
+    vpc     = string
+    subnet  = string
+  }))
+}
+
+variable routes {
+  description = "A map of routes"
+  type        = map(object({
+    gateway = string
+    cidr_block  = string
+    route_table = string
   }))
 }
