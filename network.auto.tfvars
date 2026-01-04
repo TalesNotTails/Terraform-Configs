@@ -39,6 +39,11 @@ sec_groups  = {
     description = "Allows http and https traffic"
     vpc = "main_vpc"
   }
+  allow_minecraft = {
+    name  = "allow_mc_SG"
+    description = "Allows minecraft traffic"
+    vpc = "main_vpc"
+  }
 }
 
 ingress_rules = {
@@ -63,6 +68,13 @@ ingress_rules = {
     from_port       = 443
     to_port         = 443
   } 
+  allow_minecraft_rule = {
+    sec_group       = "allow_minecraft" 
+    ip_protocol     = "tcp"
+    cidr_ipv4       = "0.0.0.0/0"
+    from_port       = 25565
+    to_port         = 25565
+  } 
 }
 
 egress_rules  = {
@@ -86,5 +98,12 @@ egress_rules  = {
     cidr_ipv4       = "0.0.0.0/0"
     from_port       = 443
     to_port         = 443
+  } 
+  allow_minecraft_rule = {
+    sec_group       = "allow_minecraft" 
+    ip_protocol     = "tcp"
+    cidr_ipv4       = "0.0.0.0/0"
+    from_port       = 25565
+    to_port         = 25565
   } 
 }
