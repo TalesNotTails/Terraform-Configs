@@ -7,7 +7,7 @@ servers = {
     vol_size  = 10
     vol_type  = "gp3"
     vol_az    = "us-east-1a"
-    sec_groups  = ["allow_ssh", "allow_web"]
+    sec_groups  = ["allow_ssh", "allow_web", "allow_minecraft"]
     tags      = {
       name = "babe_mc_server"
     }
@@ -20,7 +20,7 @@ servers = {
     vol_size  = 10
     vol_type  = "gp3"
     vol_az    = "us-east-1a"
-    sec_groups  = ["allow_ssh", "allow_web"]
+    sec_groups  = ["allow_ssh", "allow_web", "allow_minecraft"]
     tags      = {
       name = "discord_mc_server"
     }
