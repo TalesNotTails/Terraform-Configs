@@ -34,16 +34,34 @@ sec_groups  = {
     description = "Allows ssh from external networks"
     vpc = "main_vpc"
   }
+  allow_web = {
+    name  = "allow_web_SG"
+    description = "Allows http and https traffic"
+    vpc = "main_vpc"
+  }
 }
 
 ingress_rules = {
   allow_ssh_rule = {
-    sec_group  = "allow_ssh" 
+    sec_group       = "allow_ssh" 
     ip_protocol     = "tcp"
     cidr_ipv4       = "0.0.0.0/0"
     from_port       = 22
     to_port         = 22
-    servers         = ["discord_mc_server"]
+  } 
+  allow_http_rule = {
+    sec_group       = "allow_web" 
+    ip_protocol     = "tcp"
+    cidr_ipv4       = "0.0.0.0/0"
+    from_port       = 80
+    to_port         = 80
+  } 
+  allow_https_rule = {
+    sec_group       = "allow_web" 
+    ip_protocol     = "tcp"
+    cidr_ipv4       = "0.0.0.0/0"
+    from_port       = 443
+    to_port         = 443
   } 
 }
 
@@ -54,5 +72,19 @@ egress_rules  = {
     cidr_ipv4       = "0.0.0.0/0"
     from_port       = 22
     to_port         = 22
+  } 
+  allow_http_rule = {
+    sec_group       = "allow_web" 
+    ip_protocol     = "tcp"
+    cidr_ipv4       = "0.0.0.0/0"
+    from_port       = 80
+    to_port         = 80
+  } 
+  allow_https_rule = {
+    sec_group       = "allow_web" 
+    ip_protocol     = "tcp"
+    cidr_ipv4       = "0.0.0.0/0"
+    from_port       = 443
+    to_port         = 443
   } 
 }
