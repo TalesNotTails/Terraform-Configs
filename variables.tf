@@ -5,11 +5,21 @@ variable servers {
     subnet    = string
     inst_ami  = string
     inst_type = string
-    vol_size  = number
-    vol_type  = string    
-    vol_az    = string
+    vol_size  = optional(number, 10)
+    vol_type  = optional(string, "gp3")
+    vol_az    = optional(string, "us-east-1a")
     tags      = map(string)
   }))
+}
+
+variable requires_storage {
+  description = "A list of server names that require persistent storage"
+  type        = list(string)
+}
+
+variable requires_eip {
+  description = "A list of server names that require an elastic IP"
+  type        = list(string)
 }
 
 ###
