@@ -7,9 +7,14 @@ variable servers {
     inst_type = string
     vol_size  = number
     vol_type  = string    
-    vol_az    = string
+    vol_az    = optional(string, "us-east-1a")
     tags      = map(string)
   }))
+}
+
+variable requires_eip {
+  description = "A list of server names the require an elastic ip"
+  type        = list(string)
 }
 
 variable vol_azs {

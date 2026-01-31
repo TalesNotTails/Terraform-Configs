@@ -1,6 +1,7 @@
 module "storage" {
   source = "./aws_modules/storage"
   servers = var.servers
+  requires_storage  = var.requires_storage
 }
 
 module "network" {
@@ -18,6 +19,7 @@ module "network" {
 module "compute" {
   source      = "./aws_modules/compute"
   servers     = var.servers
+  requires_eip  = var.requires_eip
   vol_ids     = module.storage.ebs_vol_ids
   vol_azs     = module.storage.ebs_vol_azs
   subnet_ids  = module.network.subnet_ids

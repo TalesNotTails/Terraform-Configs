@@ -6,3 +6,8 @@ variable servers {
     vol_az    = string
   }))
 }
+
+variable requires_storage {
+  description = "A list of server names that require persistent storage"
+  type        = list(string)
+}
