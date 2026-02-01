@@ -2,6 +2,7 @@ variable servers {
   description = "A map of servers with properties to create"
   type        = map(object({
     sec_groups  = list(string)
+    public_ip = bool
     subnet    = string
     inst_ami  = string
     inst_type = string

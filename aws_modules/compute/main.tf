@@ -5,6 +5,7 @@ resource "aws_instance" "instances" {
   subnet_id                   = var.subnet_ids[each.value.subnet]
   ami                         = each.value.inst_ami
   vpc_security_group_ids      = var.sec_group_ids[each.key]
+  associate_public_ip_address = each.value.public_ip
   root_block_device {
     delete_on_termination = true
   }
@@ -26,6 +27,15 @@ resource "aws_eip" "eips" {
     for k, v in var.servers : k => v
     if contains(var.requires_eip, k)
   }
-  instance  = aws_instance.instances[each.key].id
+  # instance  = aws_instance.instances[each.key].id
   domain    = "vpc"
+}
+
+resource "aws_eip_association" "eip_assoc" {
+  for_each  = {
+    for k, v in var.servers : k => v
+    if contains(var.requires_eip, k)
+  }
+  instance_id = aws_instance.instances[each.key].id
+  allocation_id = aws_eip.eips[each.key].id
 }
